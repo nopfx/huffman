@@ -65,6 +65,7 @@ fn main() {
     println!("Binary map:");
     println!("{:?}", map);
 
+    // Permest i metoda
     let mut binary_data: String = String::new();
     for letter in input_data.chars() {
         if let Some(binary) = map.get(&letter) {
@@ -72,6 +73,8 @@ fn main() {
         }
     }
     println!("Binnary: {}", binary_data);
+
+    // metodas atkodavimui
 }
 
 fn frequency(kur: &String) -> Vec<(char, u64)> {
