@@ -137,10 +137,26 @@ fn main() {
             let mut map = HashMap::new();
             decode_tree(&root, String::new(), &mut map);
             let dbytes = decode_file_bytes(encoded_data);
-            println!("{:?}", dbytes);
-            println!("{:?}", map);
+
+            let decoded_data = decoder(map, dbytes);
+            println!("{:?}", decoded_data);
         }
     }
+}
+
+fn decoder(map: HashMap<String, u8>, encoded: String) -> String {
+    let mut decoded = String::new();
+    let mut buffer = String::new();
+
+    for bit in encoded.chars() {
+        buffer.push(bit);
+
+        if let Some(&decoded_char) = map.get(buffer.as_str()) {
+            decoded.push(char::from_u32(decoded_char as u32).unwrap());
+            buffer.clear();
+        }
+    }
+    decoded
 }
 
 fn decode_file_bytes(edata: &[u8]) -> String {
