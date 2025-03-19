@@ -1,10 +1,10 @@
 use crate::htree::TreeNode;
 use std::collections::HashMap;
 
-fn parse(data: &Vec<u8>) -> (Vec<(u8, u64)>, Vec<u8>) {
+fn parse(data: &[u8]) -> (Vec<(u8, u64)>, Vec<u8>) {
     let mut offset = 4;
 
-    let len = u32::from_le_bytes(data[0..offset as usize].try_into().unwrap()) as usize;
+    let len = u32::from_le_bytes(data[0..offset].try_into().unwrap()) as usize;
     let mut frequencies = Vec::new();
 
     for _ in 0..len {
@@ -20,7 +20,7 @@ fn parse(data: &Vec<u8>) -> (Vec<(u8, u64)>, Vec<u8>) {
 }
 
 fn decode_file_bytes(edata: &[u8]) -> String {
-    edata.into_iter().map(|f| format!("{:08b}", f)).collect()
+    edata.iter().map(|f| f.to_string()).collect()
 }
 
 fn decode(map: HashMap<u8, String>, data: String) -> Vec<u8> {
@@ -40,7 +40,7 @@ fn decode(map: HashMap<u8, String>, data: String) -> Vec<u8> {
     decoded
 }
 
-pub fn data(input: &Vec<u8>) -> Vec<u8> {
+pub fn data(input: &[u8]) -> Vec<u8> {
     let (frequencies, data) = parse(input);
 
     let tree_nodes: Vec<TreeNode> = frequencies.clone().into_iter().map(TreeNode::new).collect();
