@@ -14,6 +14,9 @@ impl Param {
         Param { list }
     }
     pub fn action(&self) -> Action {
+        if self.list.len() <= 2 {
+            return Action::Help;
+        }
         match self.list[1].as_str() {
             "encode" => Action::Encode,
             "decode" => Action::Decode,
