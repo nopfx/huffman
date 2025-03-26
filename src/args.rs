@@ -35,7 +35,7 @@ impl Param {
 
 pub fn help() {
     println!("\n");
-    println!("Usage: huffman [encode | decode] --in my_file.png --out compresed.huffman");
+    println!("Usage: huffman [encode | decode] --in my_file.txt --out compresed.huffman");
     println!("\n ACTION:");
     println!("\t encode: compress file");
     println!("\t decode: decompress file");
